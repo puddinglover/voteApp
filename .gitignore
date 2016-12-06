@@ -1,1 +1,4 @@
 node_modeules
+bower_components
+npm-debug.log
+dist
