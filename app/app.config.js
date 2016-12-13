@@ -2,7 +2,12 @@
  * Load modules for application
  */
 
-angular.module('voteApp', ['ui.router'])
+angular.module('voteApp', [
+	'ui.router',
+	'ngMaterial',
+	'ngAnimate',
+	'voteApp.homeServices'
+])
 
 .constant('CONFIG',
 {

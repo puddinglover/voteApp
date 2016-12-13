@@ -16,7 +16,7 @@ var build = './dist';
 //Config paths.
 var	config = {
 	bowerDir: './bower_components',
-    sassPath: './assets/css',
+    sassPath: './assets/scss',
     javaPath: './assets/js',
     imgPath: './assets/img',
     fontPath: '/font'
@@ -80,8 +80,8 @@ gulp.task('css', function() {
         stopOnError: true,
         cacheLocation: '../../cache',
         loadPath: [
-            './css/sass'
-					]
+					'.assets/scss/'
+				]
         })
         .on("error", notify.onError(function (error) {
            return "Error: " + error.message;
@@ -90,11 +90,30 @@ gulp.task('css', function() {
 				.pipe(browserSync.stream());
 });
 
+gulp.task('materialcss', function() {
+	return sass(config.sassPath + '/material.scss', {
+			precision: 6,
+			stopOnError: true,
+			cacheLocation: '../../cache',
+			loadPath: [
+				config.bowerDir + '/angular-material/',
+				config.bowerDir + '/angular-material/modules/scss'
+			]
+			})
+			.on("error", notify.onError(function (error) {
+				 return "Error: " + error.message;
+			}))
+			.pipe(gulp.dest(dist.css))
+			.pipe(browserSync.stream());
+});
+
 //Locations of our javascripts files.
 var javascript = [
     config.bowerDir + '/angular/angular.js',
     config.bowerDir + '/angular-material/angular-material.js',
-		config.bowerDir + '/angular-ui-router/release/angular-ui-router.js'
+		config.bowerDir + '/angular-ui-router/release/angular-ui-router.js',
+		config.bowerDir + '/angular-animate/angular-animate.js',
+		config.bowerDir + '/angular-aria/angular-aria.js'
     ]
 
 //Javascript task
@@ -115,6 +134,7 @@ gulp.task('watch', ['default'], function() {
     gulp.watch('*.php', ['php']);
     gulp.watch(config.sassPath + '/**/*.scss', ['css']);
     gulp.watch('/*.js', ['js']);
+		gulp.watch('./app/**/*', ['app']);
 });
 
 //compress css task with gulpnano. Runs css task before executing
@@ -147,4 +167,4 @@ gulp.task('compress', ['compress-css', 'compress-js']);
 gulp.task('default', ['app', 'bower', 'icons', 'css', 'php', 'js', 'fonts']);
 
 //Production task. Use before using on live site.
-gulp.task('production',['default', 'compress','img']);
+gulp.task('production',['default', 'materialcss', 'compress','img']);

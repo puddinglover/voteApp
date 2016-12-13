@@ -9,14 +9,14 @@ angular.module('voteApp')
     // any unknown URLS go to 404
     $urlRouterProvider.otherwise('/404');
     // no route goes to index
-    $urlRouterProvider.when('', '/');
+    $urlRouterProvider.when('', '/home');
     // use a state provider for routing
 
     $stateProvider.state('home', {
-      url: '/',
+      url: '/home',
             templateUrl: 'app/components/home/views/home.view.php',
             controller: "homeController",
-            controllerAs: 'ctrl'
+            controllerAs: 'homeCtrl'
         })
         .state('404', {
             url: '/404',
@@ -27,6 +27,6 @@ angular.module('voteApp')
             url: '/about',
             templateUrl: 'app/components/about/views/about.view.php',
             controller: 'aboutController',
-            controllerAs: 'ctrl'
+            controllerAs: 'aboutCtrl'
         });
 }]);

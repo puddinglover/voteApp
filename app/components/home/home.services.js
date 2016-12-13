@@ -1,51 +1,23 @@
-(function () {
-    'use strict';
+angular.module('voteApp.homeServices', [])
+    .service('asyncService', asyncService);
 
-    angular.module('voteApp', [])
-        .service('asyncService', asyncService);
+asyncService.$inject = ['$http', '$q'];
 
-    asyncService.$inject = ['$http', '$q'];
+function asyncService($http, $q) {
 
-    function asyncService($http, $q) {
+  var appUrl = "../dist/app/";
 
-        var factory = {
-            //properties
-            getColumnData: getColumnData
-        };
+  var factory = {
+    //properties
+    getIdeasData: getIdeasData
+  };
 
-        function getIdeasData() {
-          var defer = $q.defer();
+  function getIdeasData() {
+    return $http({
+      method: 'GET',
+      url: appUrl + "ajax/getideas.php"
+    });
+  }
 
-          $http({
-              method: 'GET',
-              url: "../../ajax/getIdeas.php"
-
-          }).then(function successCallback(response) {
-              defer.resolve(response.data);
-          }, function errorCallback(response) {
-              defer.reject(response);
-          });
-
-          return defer.promise
-        }
-
-        function getColumnData(columnum) {
-
-            var defer = $q.defer()
-
-            $http({
-                method: 'GET',
-                url: "http://jsonplaceholder.typicode.com" + "/posts/" + columnum
-
-            }).then(function successCallback(response) {
-                defer.resolve(response.data);
-            }, function errorCallback(response) {
-                defer.reject(response);
-            });
-
-            return defer.promise
-        }
-
-        return factory;
-    }
-})();
+  return factory;
+};
