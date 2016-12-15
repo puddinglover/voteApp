@@ -48,7 +48,14 @@ function homeController($scope, $http, $window, $q, asyncService) {
         if(currentUser.username !== ""){
           vm.currentUserUsername = currentUser.username;
         }
-        $q.reject('No username');
+        $q.resolve('No username');
+      })
+      .then(function(result){
+        asyncService.getIdeasData()
+        .then(function(result){
+          console.log(result.data);
+          vm.ideasData = result.data;
+        });
       })
       .catch(function(error){
         if(error.status === 400){
@@ -57,10 +64,7 @@ function homeController($scope, $http, $window, $q, asyncService) {
           console.log(error);
         }
       });
-      asyncService.getIdeasData()
-      .then(function(result){
-        vm.ideasData = result.data;
-      });
+
       // vm.asyncService.getCurrentUser();
       console.log('CONTROLLER LIVE MOTHERFUCKER');
     }
@@ -83,16 +87,20 @@ function homeController($scope, $http, $window, $q, asyncService) {
 
     vm.changeVote = function(idea){
       var ideaID = idea.id;
-      asyncService.checkUserLikeIdea(currentUser.id, ideaID)
+      asyncService.changeVote(currentUser.id, ideaID)
       .then(function(result){
-        console.log(result.data);
-        if(result.data === "true"){
-          return asyncService.unlikeIdea(currentUser.id, ideaID);
+        var data = result.data;
+        if(data.executed === true) {
+          if(data.action === "like"){
+            idea.number_of_likes++;
+            idea.userLikes = true;
+          } else if( data.action === "unlike") {
+            idea.number_of_likes--;
+            idea.userLikes = false;
+          }
+        } else {
+          console.log(result.data);
         }
-        return asyncService.likeIdea(currentUser.id, ideaID);
-      })
-      .then(function(result){
-        console.log(result.data);
       })
       .catch(function(error){
         console.log(error.data);

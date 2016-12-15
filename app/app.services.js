@@ -16,9 +16,8 @@ function asyncService($http, $q, $cookies) {
     createCookie: createCookie,
     createUserWithCookie: createUserWithCookie,
     insertUserName: insertUserName,
-    checkUserLikeIdea: checkUserLikeIdea,
-    likeIdea: likeIdea,
-    unlikeIdea: unlikeIdea
+    changeVote: changeVote,
+    checkUserLikeIdea: checkUserLikeIdea
   };
 
   function getIdeasData() {
@@ -97,6 +96,19 @@ function asyncService($http, $q, $cookies) {
     });
   }
 
+  function changeVote(userID, ideaID) {
+    var data = {
+      'userID' : userID,
+      'ideaID' : ideaID
+    };
+    var json = JSON.stringify(data);
+    return $http({
+      method: 'POST',
+      url: appUrl + "ajax/changeVoteForIdea.php",
+      data: json
+    });
+  }
+
   function checkUserLikeIdea(userID, ideaID) {
     var data = {
       'userID' : userID,
@@ -106,32 +118,6 @@ function asyncService($http, $q, $cookies) {
     return $http({
       method: 'POST',
       url: appUrl + "ajax/checkUserLikeIdea.php",
-      data: json
-    });
-  }
-
-  function likeIdea(userID, ideaID) {
-    var data = {
-      'userID' : userID,
-      'ideaID' : ideaID
-    };
-    var json = JSON.stringify(data);
-    return $http({
-      method: 'POST',
-      url: appUrl + "ajax/likeIdea.php",
-      data: json
-    });
-  }
-
-  function unlikeIdea(userID, ideaID) {
-    var data = {
-      'userID' : userID,
-      'ideaID' : ideaID
-    };
-    var json = JSON.stringify(data);
-    return $http({
-      method: 'POST',
-      url: appUrl + "ajax/unlikeIdea.php",
       data: json
     });
   }

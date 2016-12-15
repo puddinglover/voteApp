@@ -11,5 +11,25 @@ $stmt->execute();
 
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+foreach($result as $r){
+  $ideaID = $r['id'];
+
+  $sql = "SELECT c.name
+  FROM idea_has_category AS ihc
+  LEFT JOIN category AS c
+  ON ihc.category_id = c.id
+  WHERE ihc.idea_id = :ideaID
+  GROUP BY ihc.category_id";
+
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindParam(':ideaID', $ideaID);
+  $stmt->execute();
+
+
+  $r['category'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  $response[] = $r;
+}
+
 header('Content-Type: application/json');
-echo json_encode($result);
+echo json_encode($response);

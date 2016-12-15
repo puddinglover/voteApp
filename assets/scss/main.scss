@@ -35,10 +35,26 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .idea-likes {
-  padding-left: 2px;
+  padding-left: 5px;
   font-weight: bold;
   color: $primary-blue;
   font-size: 1.5em;
+}
+
+.like-button {
+  color: $primary-orange;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.category-holder {
+
+  margin: 10px 0px 0px 0px;
+
+  .category {
+    font-weight: bold;
+    margin-right: 20px;
+  }
 }
 
 .button {
