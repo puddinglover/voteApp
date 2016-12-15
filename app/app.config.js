@@ -6,7 +6,8 @@ angular.module('voteApp', [
 	'ui.router',
 	'ngMaterial',
 	'ngAnimate',
-	'voteApp.homeServices'
+	'ngCookies',
+	'voteApp.services'
 ])
 
 .constant('CONFIG',

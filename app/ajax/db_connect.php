@@ -41,4 +41,4 @@ $pdo = new PDO(
 );
 //The PDO object can now be used to query MySQL.
 
- ?>
+ 

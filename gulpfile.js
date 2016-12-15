@@ -7,6 +7,7 @@ var bower = require('gulp-bower');
 var concat = require('gulp-concat');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
+var imageResize = require('gulp-image-resize');
 var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync').create();
 
@@ -53,7 +54,7 @@ gulp.task('fonts', function(){
 });
 
 //Image task. Optimize size
-gulp.task('img', function(){
+gulp.task('img', ['img-idea'], function(){
     return gulp.src(config.imgPath + '/**/*')
         .pipe(imagemin({
             progressive: true,
@@ -64,6 +65,18 @@ gulp.task('img', function(){
             use: [pngquant()]
         }))
         .pipe(gulp.dest(dist.img));
+});
+
+//Resize idea-images
+gulp.task('img-idea', function () {
+  gulp.src(config.imgPath + '/idea-image/*')
+    .pipe(imageResize({
+      width : 600,
+      height : 360,
+      crop : true,
+      upscale : false
+    }))
+    .pipe(gulp.dest(config.imgPath + '/idea-image/min'));
 });
 
 //php Function
@@ -113,7 +126,8 @@ var javascript = [
     config.bowerDir + '/angular-material/angular-material.js',
 		config.bowerDir + '/angular-ui-router/release/angular-ui-router.js',
 		config.bowerDir + '/angular-animate/angular-animate.js',
-		config.bowerDir + '/angular-aria/angular-aria.js'
+		config.bowerDir + '/angular-aria/angular-aria.js',
+		config.bowerDir + '/angular-cookies/angular-cookies.js'
     ]
 
 //Javascript task

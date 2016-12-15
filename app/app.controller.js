@@ -1,15 +1,14 @@
 angular.module('voteApp')
     .controller('appController', appController);
 
-appController.$inject = ["$scope", "$http", "$window", "$q"];
+appController.$inject = ["$scope", "$http", "$window", "$q", '$cookies', "asyncService"];
 
-function appController($scope, $http, $window, $q) {
+function appController($scope, $http, $window, $q, $cookies, asyncService) {
 
     var vm = this;
 
-
     var init = function(){
-      console.log('CONTROLLER LIVE MOTHERFUCKER');
+      console.log('VOTEAPP LIVE MOTHERFUCKER');
     }
 
     init();
