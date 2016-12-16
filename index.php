@@ -6,6 +6,7 @@
     <title>VoteApp ALPHA</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
 
     <script src="assets/js/main.js"></script>
     <script src="app/app.services.js"></script>
