@@ -3,8 +3,7 @@
 /**
  * This script connects to MySQL using the PDO object.
  * This can be included in web pages where a database connection is needed.
- * Customize these to match your MySQL database connection details.
- * This info should be available from within your hosting panel.
+ * SHOULD NOT BE LOCATED HERE IN ROOT FOLDER.
  */
 
 //Our MySQL user account.
@@ -21,8 +20,6 @@ define('MYSQL_DATABASE', 'sustainable_valley_db');
 
 /**
  * PDO options / configuration details.
- * I'm going to set the error mode to "Exceptions".
- * I'm also going to turn off emulated prepared statements.
  */
 $pdoOptions = array(
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -39,6 +36,3 @@ $pdo = new PDO(
     MYSQL_PASSWORD, //Password
     $pdoOptions //Options
 );
-//The PDO object can now be used to query MySQL.
-
- 

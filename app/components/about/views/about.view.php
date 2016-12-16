@@ -1,3 +1,3 @@
 <div class="row clearfix">
-  hej 
+  This should contain an about page 
 </div>

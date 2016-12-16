@@ -1,6 +1,7 @@
 <?php
 require 'db_connect.php';
 
+// Ajax call for returning a user, depending on its cookie ID.
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 try {

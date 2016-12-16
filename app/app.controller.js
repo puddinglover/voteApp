@@ -8,7 +8,6 @@ function appController($scope, $http, $window, $q, $cookies, asyncService) {
     var vm = this;
 
     var init = function(){
-      console.log('VOTEAPP LIVE MOTHERFUCKER');
     }
 
     init();

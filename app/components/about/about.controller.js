@@ -9,9 +9,6 @@
     function aboutController($scope, $http, $window, $q) {
 
         var vm = this;
-        
-        vm.Heading = "About Page";
-        vm.Text = "This is a sample about page.";
 
         return vm;
     }

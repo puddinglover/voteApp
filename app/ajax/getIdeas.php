@@ -1,6 +1,8 @@
 <?php
 require 'db_connect.php';
 
+// Ajax call for returning the idea, the vote count and the different categories for the idea.
+
 $sql = "SELECT i.*, count(ul.idea_id) as number_of_likes
 FROM idea AS i
 LEFT JOIN user_likes AS ul

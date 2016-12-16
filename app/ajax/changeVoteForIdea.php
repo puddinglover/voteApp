@@ -3,7 +3,7 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 require 'db_connect.php';
 
-
+// Change the vote for the idea. Returns an object that displays the action taken.
 try {
 
   if(!isset($request->userID) || !isset($request->ideaID)){
@@ -24,6 +24,8 @@ try {
   WHERE user_id = :userID
   AND idea_id = :ideaID";
   $stmt = $pdo->prepare($sql);
+
+  // Quick execution of a pdo statement with variables.
   $stmt->execute(array(
     ':userID' => $userID,
     ':ideaID' => $ideaID

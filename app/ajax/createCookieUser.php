@@ -1,6 +1,8 @@
 <?php
 require 'db_connect.php';
 
+
+// AJAX call for creating a user with a cookie id. Returns true if completed.
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 try {

@@ -1,3 +1,5 @@
+// Factory for our app. This contains different Ajax calls that can be used throughout the app.
+
 angular.module('voteApp.services', [])
     .service('asyncService', asyncService);
 

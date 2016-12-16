@@ -1,6 +1,7 @@
 <?php
 require 'db_connect.php';
 
+// Function for inserting a user name, depending on the cookie ID.
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 try {
@@ -36,7 +37,7 @@ try {
   if($result !== true){
     throw new Exception('Something went wrong in SQL query');
   }
-  
+
   echo json_encode($result);
 } catch (Exception $e) {
   header('HTTP/1.0 400 Bad error');

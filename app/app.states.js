@@ -23,7 +23,6 @@ angular.module('voteApp')
             templateUrl: 'app/shared/404.html'
         })
         .state('about', {
-            // we'll add another state soon
             url: '/about',
             templateUrl: 'app/components/about/views/about.view.php',
             controller: 'aboutController',

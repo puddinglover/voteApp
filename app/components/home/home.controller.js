@@ -13,25 +13,28 @@ function homeController($scope, $http, $window, $q, asyncService) {
     vm.appUrl = "../dist/app/";
     vm.tempUserName = "anonymous";
 
+    //Init function. Called when controller is initialized
     var init = function(){
       var cookieKey = 'voteAppCookie';
-      // $cookies.remove(cookieKey);
+      // Tries to get the cookie value of voteApp cookie
       asyncService.getCookieValue(cookieKey)
       .then(function(result){
         var cookieValue = result;
         if(result === false){
           var cookieValue = generateUid();
+          // Creates cookie if no cookie found
           return asyncService.createCookie(cookieKey, cookieValue);
         }
         return $q.resolve(cookieValue);
       })
       .then(function(result){
         currentUserCookieValue = result;
+        // Tries to find a user with the cookie
         return asyncService.getUserWithCookie(currentUserCookieValue);
       })
       .then(function(result){
         if(result.data === "false") {
-          console.log('creating user: ', result.data);
+          // Creates user if no user found
           return asyncService.createUserWithCookie(currentUserCookieValue);
         }
         return $q.resolve(result);
@@ -44,7 +47,7 @@ function homeController($scope, $http, $window, $q, asyncService) {
       })
       .then(function(result){
         currentUser = result.data;
-        console.log(result.data);
+        // Sets the current user for use
         if(currentUser.username !== ""){
           vm.currentUserUsername = currentUser.username;
         }
@@ -52,8 +55,8 @@ function homeController($scope, $http, $window, $q, asyncService) {
       })
       .then(function(result){
         asyncService.getIdeasData()
+        // Gets the idea
         .then(function(result){
-          console.log(result.data);
           vm.ideasData = result.data;
         });
       })
@@ -64,12 +67,9 @@ function homeController($scope, $http, $window, $q, asyncService) {
           console.log(error);
         }
       });
-
-      // vm.asyncService.getCurrentUser();
-      console.log('CONTROLLER LIVE MOTHERFUCKER');
     }
 
-
+    // Saves the username
     vm.saveUserName = function(userName){
       asyncService.insertUserName(currentUser.cookie, userName)
       .then(function(result){
@@ -78,13 +78,13 @@ function homeController($scope, $http, $window, $q, asyncService) {
         } else {
           console.log(result.data);
         }
-
       })
       .catch(function(error){
         console.log(error.data);
       });
     }
 
+    // Changes the vote for the different ideas for either like or unliked depending on the user
     vm.changeVote = function(idea){
       var ideaID = idea.id;
       asyncService.changeVote(currentUser.id, ideaID)

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Gulp beast</title>
+    <title>VoteApp ALPHA</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,7 +24,6 @@
 
 <body ng-app="voteApp">
 
-    <!-- Add content here -->
     <div ng-controller="appController as ctrl" ng-cloak>
 
     <!-- start dynamic content -->

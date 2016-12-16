@@ -1,5 +1,5 @@
 /**
- * Load modules for application
+ * Load modules for application. This is where we insert our dependencies.
  */
 
 angular.module('voteApp', [
